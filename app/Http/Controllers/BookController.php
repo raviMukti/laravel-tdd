@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    
+    /**
+     * Store a new book.
+     *
+     * @param Request $request The HTTP request object.
+     * @throws \Exception A description of the exception.
+     * @return void
+     */
     public function store(Request $request)
     {
-        Book::create([
-            "title" => $request["title"],
-            "author" => $request["author"],
+        $data = $request->validate([
+            "title" => "required",
+            "author" => "required",
         ]);
+
+        Book::create($data);
     }
 }
